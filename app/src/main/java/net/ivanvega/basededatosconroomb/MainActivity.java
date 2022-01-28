@@ -2,13 +2,17 @@ package net.ivanvega.basededatosconroomb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.database.Cursor;
 import android.os.Bundle;
+import android.provider.ContactsContract;
+import android.provider.UserDictionary;
 import android.util.Log;
 import android.widget.Button;
 
 import net.ivanvega.basededatosconroomb.data.AppDataBase;
 import net.ivanvega.basededatosconroomb.data.User;
 import net.ivanvega.basededatosconroomb.data.UserDao;
+import net.ivanvega.basededatosconroomb.provider.UsuarioProviderContract;
 
 public class MainActivity extends AppCompatActivity {
     Button btnIn, btnQue;
@@ -18,6 +22,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //ContactsContract.Contacts.CONTENT_URI;
+
+        Cursor cursor = getContentResolver().query(
+                UsuarioProviderContract.CONTENT_URI,
+                UsuarioProviderContract.COLUMNS,
+                null,null,null
+        );
 
         btnIn = findViewById(R.id.btnInsert);
         btnQue = findViewById(R.id.btnQuery);
